@@ -14,7 +14,7 @@ class ImportRecord extends Controller
      */
     public function index($import_sn,$record)
     {
-    	$error=0;
+    	$error=array('errnum'=>0,'message'=>'');
     	$num = count($record);
 
         //将校验合格的记录保存到数据库
@@ -27,7 +27,8 @@ class ImportRecord extends Controller
 	        		if(preg_match("/^1[34578]\d{9}$/", $record[$i])){
 
 					}else{
-						$error=1;
+						$error['errnum']=1;
+						$error['message']='手机号格式不正确';
 					}
 	        		break;
 	        	default:
@@ -46,7 +47,7 @@ class ImportRecord extends Controller
             'created_at'    => date('Y-m-d H:i:s'),
             'updated_at'    => date('Y-m-d H:i:s'),
         ]);
-		if($error==0){
+		if($error['errnum']==0){
 			$user = User::where('mobile', $record[2])->first();
 
 		    if (!$user) {
