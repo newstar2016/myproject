@@ -36,8 +36,8 @@ class ReadCsv extends Controller
         foreach ($result as $key => $value) {
             if($value[1]){
 	            $import_res=$this->ImportRecord_obj->index($this->import_sn,$value);
-				if($import_res==1){
-					Log::channel('importLog')->info('导入批次号：'.$this->import_sn.'手机号：'.$value[2].'的用户信息导入失败');
+				if($import_res['errnum']==1){
+					Log::channel('importLog')->info('导入批次号：'.$this->import_sn.'手机号：'.$value[2].'的用户信息导入失败,失败原因：'.$import_res['message']);
 					$error_num++;
 				}else{
 					Log::channel('importLog')->info('导入批次号：'.$this->import_sn.'手机号：'.$value[2].'的用户信息导入成功');
@@ -52,8 +52,8 @@ class ReadCsv extends Controller
 		Log::channel('importLog')->info('批次'.$this->import_sn.'导入耗时：'.$useTime.'秒');
 	    //导入结束后,对结果进行汇总
 	    $result = Import::where('import_sn',$this->import_sn)->update([
-            'import_success'    => $this->success_num,
-            'import_error'    => $this->error_num,
+            'import_success'    => $success_num,
+            'import_error'    => $error_num,
         ]);
 	}
 
