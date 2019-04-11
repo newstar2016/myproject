@@ -34,9 +34,9 @@ class UserImportController extends Controller
                 $clientName = $fileCharater -> getClientOriginalName();
 
                 //判断文件是否已经存在,如果提示失败
-                // if(file_exists(storage_path('app/public/'.$clientName))){
-                //     return "请勿重复上传相同的文件";
-                // }
+                if(file_exists(storage_path('app/public/'.$clientName))){
+                    return "请勿重复上传相同的文件";
+                }
                 //获取文件的扩展名 
                 $ext = $fileCharater->getClientOriginalExtension();
                 $ext_lower=strtolower($ext);

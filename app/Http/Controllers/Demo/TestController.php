@@ -18,7 +18,7 @@ class TestController extends Controller
      */
     public function index()
     {    
-        $csvfile="C:\\users.csv";
+//        $csvfile="C:\\users.csv";
         // $lines=100;
         // $offset=0;
         // $data=$this->csv_get_lines($csvfile,$lines,$offset);
@@ -38,15 +38,20 @@ class TestController extends Controller
         //     var_dump($excel_orders);exit;
         // }
         // $start=time();
-        $result=$this->readCvs($csvfile);
-        foreach ($result as $key => $value) {
-          print_r($value);
-          echo "<br />";
-        }
+//        $result=$this->readCvs($csvfile);
+//        foreach ($result as $key => $value) {
+//          print_r($value);
+//          echo "<br />";
+//        }
         // $end=time();
         // echo $end-$start;
         // $readObj=new ReadCsv();
         // $readObj->index($csvfile);
+        try{
+
+        }catch (\Exception $e){
+            $e->getMessage();
+        }
     }
 
     public function queue() {
