@@ -32,7 +32,7 @@ class ReadCsv extends Controller
         Log::channel('importLog')->info('批次'.$this->import_sn.'导入开始');
         $startTime=time();
         //导入文件中的用户信息
-        $result=$this->readCvs($filepath);        
+        $result=$this->readCsv($filepath);
         foreach ($result as $key => $value) {
             if($value[1]){
 	            $import_res=$this->ImportRecord_obj->index($this->import_sn,$value);
@@ -48,7 +48,7 @@ class ReadCsv extends Controller
         
 		$endTime=time();
 		$useTime=$endTime-$startTime;
-		Log::channel('importLog')->info('批次'.$this->import_sn.'导入结束,共导入'.($success_num+$error_num).'条,成功'.$error_num.'条失败'.$success_num.'条');
+		Log::channel('importLog')->info('批次'.$this->import_sn.'导入结束,共导入'.($success_num+$error_num).'条,成功'.$success_num.'条失败'.$error_num.'条');
 		Log::channel('importLog')->info('批次'.$this->import_sn.'导入耗时：'.$useTime.'秒');
 	    //导入结束后,对结果进行汇总
 	    $result = Import::where('import_sn',$this->import_sn)->update([
@@ -61,7 +61,7 @@ class ReadCsv extends Controller
      * 读取csv文件
      * @param $filepath csv文件路径
      * */
-    public function readCvs($filepath){
+    public function readCsv($filepath){
         $handle= fopen($filepath, 'rb');
         while (feof($handle)===false) {
             yield fgetcsv($handle);

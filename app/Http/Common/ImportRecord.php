@@ -68,7 +68,6 @@ class ImportRecord extends Controller
                 } else {
                     $user->username = $record[0];
                     $user->sex = $record[1];
-                    $user->mobile = $record[2];
                     $user->birthday = $record[3];
                     $user->address = $record[4];
                     $user->updated_at = date('Y-m-d H:i:s');
@@ -76,10 +75,10 @@ class ImportRecord extends Controller
                 }
             }
             DB::commit();
-        }catch (\Exception $e){
+            return $error;
+        }catch (\Exception $e) {
             DB::rollBack();
-            Log::channel('importLog')->info('ImportRecord导入出现异常:'.$e->getMessage());
+            Log::channel('importLog')->info('ImportRecord导入出现异常:' . $e->getMessage());
         }
-		return $error;
 	}
 }
