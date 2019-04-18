@@ -16,11 +16,6 @@ class JsonFormatter extends BaseJsonFormatter
     {
         $action = \Route::currentRouteAction();
         // 这个就是最终要记录的数组，最后转成Json并记录进日志
-        if (!empty($record['context'])) {
-            $record['context'] = $record['context'];
-        }else{
-            $record['context']='';
-        }
         $newRecord = [
             'request_id' => LOG_ID,
             'action' => $action,
