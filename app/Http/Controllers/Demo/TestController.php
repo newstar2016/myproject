@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
 use App\Jobs\ReadCsvJob;
-use Illuminate\Support\Facades\Log;
 use App\Http\Common\CsvReader;
 use App\Http\Common\ReadCsv;
+use Illuminate\Support\Facades\Log;
 
 class TestController extends Controller
 {
@@ -17,7 +17,7 @@ class TestController extends Controller
      * 测试
      */
     public function index()
-    {    
+    {
 //        $csvfile="C:\\users.csv";
         // $lines=100;
         // $offset=0;
@@ -47,9 +47,15 @@ class TestController extends Controller
         // echo $end-$start;
         // $readObj=new ReadCsv();
         // $readObj->index($csvfile);
-        try{
 
-        }catch (\Exception $e){
+        try{
+            $hash1 = md5(uniqid());
+            $hash2 = md5(uniqid()).rand(1,99999);
+            var_dump($hash1.'----'.$hash2);exit;
+//            $message = 'Some message'.LOG_ID;
+//            $log = ['user_id'=>1,'user_name'=>'abcd'];
+//            Log::info($message, $log);  //Log后的数组会自动转成Json存
+        }catch (\Exception $e) {
             $e->getMessage();
         }
     }

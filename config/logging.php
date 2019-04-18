@@ -41,6 +41,8 @@ return [
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
+            // 挂载日志格式接口（重点）
+            'tap' => [App\Extensions\Log\ApplogFormatter::class],
             'level' => 'debug',
         ],
 
